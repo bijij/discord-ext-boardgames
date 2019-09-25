@@ -75,7 +75,7 @@ class Board:
         out = self.pivot + self.spacer
         for i, _ in enumerate(self._state[0]):
             out += '​' + regional_indicator(i)
-        out += '\n' + self.spacer * (len(self._state) + 2)
+        out += '\n' + self.spacer * (len(self._state[0]) + 2)
 
         for y, row in enumerate(self._state):
             # Setup row guide
