@@ -1,30 +1,31 @@
 import re
 from typing import Union
 
+import discord
 from discord.ext import commands
 
-__all__ = ('regional_indicator',  'keycap_digit', 'Cell', 'Board')
+__all__ = ('regional_indicator', 'keycap_digit', 'Cell', 'Board')
 
 
-def regional_indicator(i):
+def regional_indicator(c: Union[int, str]) -> str:
     """Returns a regional indicator emoji given an index."""
-    if isinstance(i, str):
-        i = ord(i.upper()) - ord('A')
-    return chr(0x1f1e6 + i)
+    if isinstance(c, str):
+        c = ord(c.upper()) - ord('A')
+    return chr(0x1f1e6 + c)
 
 
-def keycap_digit(i):
+def keycap_digit(c: Union[int, str]) -> str:
     """Returns a keycap digit emoji given an index."""
-    if i == 10:
+    if c == 10:
         return '\N{keycap ten}'
-    return str(i) + '\N{combining enclosing keycap}'
+    return str(c) + '\N{combining enclosing keycap}'
 
 
 class Cell(commands.Converter):
     """Returns the index of a cell."""
 
     @classmethod
-    async def convert(self, ctx: commands.Context, argument: str):
+    async def convert(self, ctx: commands.Context, argument: str) -> str:
         if re.match(r'[A-z]\d+', argument):
             return (int(argument[1:]) - 1, ord(argument[0].upper()) - 65)
 
@@ -45,7 +46,7 @@ class Board:
     pivot = '\N{black circle for record}'
     spacer = '\N{black large square}'
 
-    def __init__(self, size_x, size_y, fill_with='\N{white large square}'):
+    def __init__(self, size_x: int, size_y: int, fill_with: Union[str, discord.Emoji] = '\N{white large square}'):
         if not 1 <= size_x <= 26:
             raise ValueError('Boards can have a maximum width of 26.')
         if not 1 <= size_y <= 10:
@@ -74,7 +75,7 @@ class Board:
 
         for y, row in enumerate(self._state):
             # Setup row guide
-            out += '\n' + keycap_digit(y+1) + self.spacer
+            out += '\n' + keycap_digit(y + 1) + self.spacer
             for cell in row:
                 out += str(cell)
 
