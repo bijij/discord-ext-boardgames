@@ -54,7 +54,7 @@ class Board:
 
         self.size_x = size_x
         self.size_y = size_y
-        self._state = [[fill_with] * size_x] * size_y
+        self._state = [[fill_with for _ in range(size_x)] for _ in range(size_y)]
 
     def __getitem__(self, ij):
         i, j = ij
