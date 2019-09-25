@@ -60,6 +60,10 @@ class Board:
         i, j = ij
         return self._state[j][i]
 
+    def __setitem__(self, ij, value):
+        i, j = ij
+        self._state[j][i] = value
+
     def __iter__(self):
         return self._state
 
