@@ -65,7 +65,7 @@ class Board:
         self._state[j][i] = value
 
     def __iter__(self):
-        return self._state
+        return self._state.__iter__()
 
     def __len__(self):
         return self.size_x * self.size_y
