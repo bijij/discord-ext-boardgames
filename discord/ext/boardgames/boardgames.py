@@ -34,7 +34,8 @@ class Board:
     pivot = '\N{black circle for record}'
     spacer = '\N{black large square}'
 
-    def __init__(self, size_x: int, size_y: int, fill_with: Union[str, discord.Emoji] = '\N{white large square}'):
+    def __init__(self, size_x: int, size_y: int, fill_with: Union[str, discord.Emoji] = '\N{white large square}', *,
+                 draw_row_guide: bool = True, draw_column_guide: bool = True):
         if not 1 <= size_x <= 26:
             raise ValueError('Boards can have a maximum width of 26.')
         if not 1 <= size_y <= 10:
@@ -59,15 +60,22 @@ class Board:
         return self.size_x * self.size_y
 
     def __str__(self):
-        # Setup column guide
-        out = self.pivot + self.spacer
-        for i, _ in enumerate(self._state[0]):
-            out += '​' + regional_indicator(i)
-        out += '\n' + self.spacer * (len(self._state[0]) + 2)
+        out = ''
+
+        if self._draw_column_guide:
+            if self._draw_row_guide:
+                out += self.pivot + self.spacer
+
+            for i, _ in enumerate(self._state[0]):
+                out += '​' + regional_indicator(i)
+            out += '\n' + self.spacer * (len(self._state[0]) + (2 if self._draw_row_guide else 0))
 
         for y, row in enumerate(self._state):
-            # Setup row guide
-            out += '\n' + keycap_digit(y + 1) + self.spacer
+            out += '\n'
+
+            if self._draw_row_guide:
+                out += keycap_digit(y + 1) + self.spacer
+
             for cell in row:
                 out += str(cell)
 
