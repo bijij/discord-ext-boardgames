@@ -44,6 +44,8 @@ class Board:
         self.size_x = size_x
         self.size_y = size_y
         self._state = [[fill_with for _ in range(size_x)] for _ in range(size_y)]
+        self._draw_row_guide = draw_row_guide
+        self._draw_column_guide = draw_column_guide
 
     def __getitem__(self, ij):
         i, j = ij
