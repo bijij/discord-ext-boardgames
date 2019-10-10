@@ -1,10 +1,9 @@
-import re
 from typing import Union
 
 import discord
-from discord.ext import commands
 
-__all__ = ('regional_indicator', 'keycap_digit', 'Cell', 'Board')
+
+__all__ = ('regional_indicator', 'keycap_digit', 'Board')
 
 
 def regional_indicator(c: Union[int, str]) -> str:
@@ -19,17 +18,6 @@ def keycap_digit(c: Union[int, str]) -> str:
     if c == 10:
         return '\N{keycap ten}'
     return str(c) + '\N{combining enclosing keycap}'
-
-
-class Cell(commands.Converter):
-    """Returns the index of a cell."""
-
-    @classmethod
-    async def convert(self, ctx: commands.Context, argument: str) -> str:
-        if re.match(r'[A-z]\d+', argument):
-            return (int(argument[1:]) - 1, ord(argument[0].upper()) - 65)
-
-        raise commands.BadArgument('Could not determine cell!')
 
 
 class Board:
