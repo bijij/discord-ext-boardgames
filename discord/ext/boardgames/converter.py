@@ -15,7 +15,7 @@ class Column(commands.Converter):
         return ord(argument.upper()) - ord('A')
 
     @classmethod
-    def convert(cls, ctx: commands.Context, argument: str) -> int:
+    async def convert(cls, ctx: commands.Context, argument: str) -> int:
         if re.match(r'[A-z]', argument):
             return cls.from_char(argument)
 
@@ -28,7 +28,7 @@ class Row(commands.Converter):
         return int(argument) - 1
 
     @classmethod
-    def convert(cls, ctx: commands.Context, argument: str) -> int:
+    async def convert(cls, ctx: commands.Context, argument: str) -> int:
         if re.match(r'\d+', argument):
             return cls.from_char(argument)
 
@@ -37,7 +37,7 @@ class Cell(commands.Converter):
     """Returns the index of a row and column."""
 
     @classmethod
-    def convert(self, ctx: commands.Context, argument: str) -> Tuple[int, int]:
+    async def convert(self, ctx: commands.Context, argument: str) -> Tuple[int, int]:
         if re.match(r'[A-z]\d+', argument):
             return (Row.from_char(argument[1:]), Column.from_char(argument[0]))
 
