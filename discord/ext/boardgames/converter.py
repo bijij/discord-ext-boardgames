@@ -2,7 +2,7 @@ import re
 
 from discord.ext import commands
 
-__all__ = ('Cell')
+__all__ = ('Cell',)
 
 
 class Cell(commands.Converter):
