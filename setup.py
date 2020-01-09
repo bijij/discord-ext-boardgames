@@ -15,9 +15,9 @@ with open('README.rst') as f:
     readme = f.read()
 
 setup(
-    name='boardgames',
+    name='discord-ext-boardgames',
     author='bijij',
-    url='https://github.com/bijij/boardgames',
+    url='https://github.com/bijij/discord-ext-boardgames',
     version=version,
     packages=['discord/ext/boardgames'],
     license='MIT',
