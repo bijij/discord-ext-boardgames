@@ -23,7 +23,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8.0"
-"discord.py" = {git = "https://github.com/rapptz/discord.py"}
+"discord.py" = ">=2.0.0a"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
